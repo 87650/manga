@@ -36,9 +36,10 @@ class Json extends Controller
     }
     public function manga_add(Request $request)
     {
-        $type = $request->input('type');
+        //$type = $request->input('type');
         $manga = $request->input('manga');
-        $result = DB::select('select id from authors where name = ?', [$id_name]);
+        $authors = $request->input('authors');
+        $result = DB::select('select id from authors where name = ?', [$authors]);
         $result1 = DB::insert('insert into manga (title,id_authors) values (?,?)', [$manga,$result[0]->id]);
     }
 

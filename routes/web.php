@@ -17,10 +17,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/api_view', [\App\Http\Controllers\Json::class, 'index']);
-Route::post('/all', [\App\Http\Controllers\Json::class, 'get'])->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
-Route::get('/manga_all/{limit}', [\App\Http\Controllers\Json::class, 'manga_all']);
-Route::get('/authors_all/{limit}', [\App\Http\Controllers\Json::class, 'authors_all']);
-Route::get('/manga/{id}', [\App\Http\Controllers\Json::class, 'manga_id']);
-Route::get('/authors/{id}', [\App\Http\Controllers\Json::class, 'authors_id']);
-Route::get('/manga/authors/{id}', [\App\Http\Controllers\Json::class, 'manga_authors']);
-Route::post('/manga/add', [\App\Http\Controllers\Json::class, 'manga_add']);
+//Route::post('/all', [\App\Http\Controllers\Json::class, 'get'])
+Route::group(function () {
+    Route::get('/manga_all/{limit}', [\App\Http\Controllers\Json::class, 'manga_all']);
+    Route::get('/authors_all/{limit}', [\App\Http\Controllers\Json::class, 'authors_all']);
+    Route::get('/manga/{id}', [\App\Http\Controllers\Json::class, 'manga_id']);
+    Route::get('/authors/{id}', [\App\Http\Controllers\Json::class, 'authors_id']);
+    Route::get('/manga/authors/{id}', [\App\Http\Controllers\Json::class, 'manga_authors']);
+    Route::post('/manga/add', [\App\Http\Controllers\Json::class, 'manga_add']);
+})->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);;
+

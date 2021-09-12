@@ -86,6 +86,21 @@ class Json extends Controller
             return $responseFactory->json([], 400);
         }
     }
+    public function manga_update(Request $request, ResponseFactory $responseFactory)
+    {
+        try {
+            //$type = $request->input('type');
+            $id = $request->input('id');
+            $manga = $request->input('manga');
+            $authors = $request->input('authors');
+            $result = DB::select('select id from authors where name = ?', [$authors]);
+            $result1 = DB::update("update manga set title = ?, id_authors = ? where id = ?", [$manga, $result[0]->id,$id]);
+            return $responseFactory->json([$result1], 200);
+        }
+        catch (QueryException $e) {
+            return $responseFactory->json([], 400);
+        }
+    }
 
 
 }

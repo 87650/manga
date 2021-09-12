@@ -25,5 +25,6 @@ Route::group([], function () {
     Route::get('/authors/{id}', [\App\Http\Controllers\Json::class, 'authors_id']);
     Route::get('/manga/authors/{id}', [\App\Http\Controllers\Json::class, 'manga_authors']);
     Route::post('/manga/add', [\App\Http\Controllers\Json::class, 'manga_add'])->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
+    Route::post('/manga/update', [\App\Http\Controllers\Json::class, 'manga_update'])->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
 });
 
